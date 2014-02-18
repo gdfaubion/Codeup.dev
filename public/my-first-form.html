@@ -18,30 +18,92 @@
         <button type="submit">Login</button>
     </p>
 	</form>
-
+    <hr>
     <h2>Compose an email</h2>
     <form method="POST" action="http://requestb.in/ylrhpvyl">
     <p>
         <label for="username">Send email to:</label>
-        <input type="text" id="to" name="email address" value="" placeholder="username@email.com">
+        <input type="text" id="email address" name="email address" value="" placeholder="username@email.com">
     </p>
     <p>
         <label for="">From:</label>
-        <input type="text" name="return address" placeholder="yourusername@emai.com">
+        <input type="text" id="return address" name="return address" placeholder="yourusername@emai.com">
     </p>
     <p>
         <label for="">Subject:</label>
-        <input type="text" name="subject" placeholder="subject">
+        <input type="text" name="subject" id="subject" placeholder="subject">
     </p>
     <p>
         <textarea id="email body" name="email body" rows="15" cols="30">Your message here</textarea>
     </p>
     <p>
+        <label>
+            <input type="checkbox" id="save a copy" name="save a copy" value="yes" checked> Save a copy to your sent folder
+        </label>
+    </p>    
+    <p>
         <button type="send">Send</button>
     </p>
-    
+
+    </form>
+    <hr>
+    <h2>Multiple choice test</h2>
+    <form>
+        <p>What is my favoritecolor?</p>
+        <p>
+            <label for="q1a">
+                <input type="radio" id="q1a" name="q1" value="Blue">
+                Blue
+            </label>
+            <label for="q1b">
+                <input type="radio" id="q1b" name="q1" value="Green">
+                Green
+            </label>
+            <label for="q1c">
+                <input type="radio" id="q1c" name="q1" value="Purple">
+                Purple
+            </label>
+            <label for="q1d">
+                <input type="radio" id="q1d" name="q1" value="Orange">
+                Orange
+            </label>
+        </p>
+        <p>What is my dogs name?</p>
+        <p>
+            <label for="q2a">
+                <input type="radio" id="q2a" name="q2" value="Coco">
+                Coco
+            </label>
+            <label for="q2b">
+                <input type="radio" id="q2b" name="q2" value="Maggie">
+                Maggie
+            </label>
+            <label for="q2c">
+                <input type="radio" id="q2c" name="q2" value="Molly">
+                Molly
+            </label>
+            <label for="q2d">
+                <input type="radio" id="q2d" name="q2" value="Gretchen">
+                Gretchen
+            </label>
+        </p>
+        <p>
+            <button type="Submit">Submit</button>
+        </p>
     </form>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
