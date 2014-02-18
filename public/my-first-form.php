@@ -1,9 +1,9 @@
 <?php
 
-echo"<p>POST:</p>";
+echo "<p>POST:</p>";
 var_dump($_POST);
 
-echo"<p>GET:</p>";
+echo "<p>GET:</p>";
 var_dump($_GET);
 
 ?>
@@ -57,7 +57,7 @@ var_dump($_GET);
     </form>
     <hr>
     <h2>Multiple Choice Questionnaire</h2>
-    <form method="POST" action="">
+    <form method="GET" action="">
         <p>What is my favorite color?</p>
         <p>
             <label for="q1a">
@@ -97,9 +97,35 @@ var_dump($_GET);
             </label>
         </p>
         <p>
+            <label>What are your top 3 favorite fruits?</label>
+            <select id="fruit" name="fruit[]" multiple>
+                <option value="Orange">Orange</option>
+                <option value="Banana">Banana</option>
+                <option value="Strawberry">Strawberry</option>
+                <option value="Apple">Apple</option>
+                <option value="Kiwi">Kiwi</option>
+                <option value="Grape">Grape</option>
+            </select>
+
+        </p>
+        <p>
             <button type="Submit">Submit</button>
         </p>
     </form>
+    <hr>
+    <h2>Select Testing</h2>
+    <form method="GET" action="">
+        <p>
+        <label for="">Do you like chocolate?</label>
+            <select id="chocolate" name="chocolate">
+                <option value="1" selected>Yes</option>
+                <option value="0">No</option>
+            </select>
+        </p>
+        <p>
+            <button type="Submit">Submit</button>
+        </p>
+    </form>    
 </body>
 </html>
 
