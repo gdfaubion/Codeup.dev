@@ -10,12 +10,11 @@
 		// Create a function called 'sayHello' that takes a parameter 'name'.
 		// When called, the function should log a message that says hello from the passed in name.
 			function sayHello(name) {
-				return console.log('Hello ' + name);
+				return console.log('Hello from ' + name);
 			}
 
 		// todo: Call the function 'sayHello' passing the variable 'myNameIs' as a parameter.
-			 var hello = sayHello(myNameIs);
-			 console.log(hello);
+			 sayHello(myNameIs);
 
 		// don't worry about the details of this line
 		// just know that it genrates a random number between 1 and 100
@@ -26,12 +25,13 @@
 		// The function should use the ternary operator to log a message.
 		// The log should tell the number passed in and whether it is odd or not.
 			function isOdd(number) {
-				return (number % 2 == 0) ? true : false;
+				 var odd = number % 2 != 0;
+				 result = odd ? console.log('Number is odd') : console.log('Number is even');
+				 console.log("Random " + result);
 			}
 
-			var result = isOdd(random);
-			console.log(result);
-
+			
+			isOdd(random);
 		// todo: Call the function 'isOdd' passing the variable 'random' as a parameter.
 	</script>
 </body>
