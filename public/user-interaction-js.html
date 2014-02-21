@@ -8,9 +8,9 @@
 		// Keep asking if an empty input is provided.
 				
 				do {
-					var response = prompt('what is you name?');
+					var response = prompt('what is you name?'); 
 
-				} while (response == '');
+				} while (response === '' || response == null);
 
 				alert('Welcome ' + response + '!');
 
