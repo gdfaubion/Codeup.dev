@@ -1,32 +1,28 @@
 <?php
-var_dump($_POST);
-
-function writeCSV($filename, $entries) {
-$handle = fopen($filename, "w");
-foreach ($entries as $entry) {
-    fputcsv($handle, $entry);
-}
-fclose($handle);
-}
-
-$address_book = [
-    ['The White House', '1600 Pennsylvania Avenue NW', 'Washington', 'DC', '20500'],
-    ['Marvel Comics', 'P.O. Box 1527', 'Long Island City', 'NY', '11101'],
-    ['LucasArts', 'P.O. Box 29901', 'San Francisco', 'CA', '94129-0901']
-];
-
-// $handle = fopen('address_book.csv', 'w');
-
-// foreach ($address_book as $fields) {
-//     fputcsv($handle, $fields);
-// }
-
-// fclose($handle);
-
-
 $fileCSV = 'data/address_book.csv';
 
-writeCSV($fileCSV, $address_book);
+function readCSV($filename) {
+	$address_book = [];
+	$handle = fopen($filename, "r");
+	while(!feof($handle)) {
+		$line = fgetcsv($handle);
+		if(!empty($line)) {
+	  		$address_book[] = $line;
+		}
+	}
+	fclose($handle);
+	return $address_book;
+}
+
+function writeCSV($filename, $entries) {
+	$handle = fopen($filename, "w");
+	foreach ($entries as $entry) {
+	    fputcsv($handle, $entry);
+	}
+	fclose($handle);
+}
+
+$address_book = readCSV($fileCSV);
 
 $errorMessage = [];
 
@@ -62,7 +58,12 @@ if(!empty($_POST)) {
 	writeCSV($fileCSV, $address_book);
 
 };
-
+if(isset($_GET['remove'])) {
+	$remove_item = array_splice($address_book, $_GET['remove'], 1);
+	writeCSV($fileCSV, $address_book);
+	header("Location: address_book.php");
+	exit(0);
+}
 
 ?>
 <!DOCTYPE>
@@ -73,11 +74,12 @@ if(!empty($_POST)) {
 <body>
 	<h2>Address Book:</h2>
 	<table>
-			<? foreach ($address_book as $entry) : ?>
+			<? foreach ($address_book as $key => $entry) : ?>
 		<tr>
 			<? foreach ($entry as $item) : ?>
-			<td> <?= $item; ?> </td>
+			<td><?= htmlspecialchars(strip_tags($item)); ?></td>
 			<? endforeach; ?>
+			<td><a href="?remove=<?= $key; ?>"> Delete Entry </a></td>
 		</tr>
 			<? endforeach; ?>
 			
