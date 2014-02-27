@@ -1,28 +1,46 @@
 <?php
-$fileCSV = 'data/address_book.csv';
+class addressDataStore {
 
-function readCSV($filename) {
-	$address_book = [];
-	$handle = fopen($filename, "r");
-	while(!feof($handle)) {
+	public $filename = '';
+
+	function readCSV()
+	{
+		$address_book = [];
+		$handle = fopen($this->filename, "r");
+		while(!feof($handle)) {
 		$line = fgetcsv($handle);
 		if(!empty($line)) {
 	  		$address_book[] = $line;
+			}
 		}
+		fclose($handle);
+		return $address_book;
+
 	}
-	fclose($handle);
-	return $address_book;
+
+	function writeCSV($entries)
+	{
+		$handle = fopen($this->filename, "w");
+
+		foreach ($entries as $entry) 
+		{
+			fputcsv($handle, $entry);
+		}
+
+		fclose($handle);
+
+	}
+
 }
 
-function writeCSV($filename, $entries) {
-	$handle = fopen($filename, "w");
-	foreach ($entries as $entry) {
-	    fputcsv($handle, $entry);
-	}
-	fclose($handle);
-}
+//new instance of addressDataStore
+$contacts = new addressDataStore();
 
-$address_book = readCSV($fileCSV);
+//set the $filename var
+$contacts->filename = 'data/address_book.csv';
+
+//output $address list
+$address_book = $contacts->readCSV();
 
 $errorMessage = [];
 
@@ -55,12 +73,12 @@ if(!empty($_POST)) {
 		}
 
 	array_push($address_book, $entry);
-	writeCSV($fileCSV, $address_book);
+	$contacts->writeCSV($address_book);
 
 };
 if(isset($_GET['remove'])) {
 	$remove_item = array_splice($address_book, $_GET['remove'], 1);
-	writeCSV($fileCSV, $address_book);
+	$contacts->writeCSV($address_book);
 	header("Location: address_book.php");
 	exit(0);
 }
@@ -93,7 +111,7 @@ if(isset($_GET['remove'])) {
 	</ul>
 	<hr>
 	<hr>
-	<h2>Add A New Address:</h2>
+	<h2>Add A New Contact:</h2>
 	<form method ="POST" action="address_book.php" >
 			<p>
 				<label for="name"><strong>Name:</strong></label>
