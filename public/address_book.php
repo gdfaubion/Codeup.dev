@@ -28,6 +28,8 @@ $fileCSV = 'data/address_book.csv';
 
 writeCSV($fileCSV, $address_book);
 
+$errorMessage = [];
+
 if(!empty($_POST)) {
 	$entry = [
 		$_POST['name'],
@@ -36,11 +38,31 @@ if(!empty($_POST)) {
 		$_POST['state'],
 		$_POST['zip'],
 		$_POST['phone']
-	];
+		];
+	if(empty($_POST['name'])) {
+		array_push($errorMessage, "!!NAME IS REQUIRED!!");
+		}
+	if(empty($_POST['address'])) {
+		array_push($errorMessage, "!!ADDRESS IS REQUIRED!!");
+		}
+	if(empty($_POST['city'])) {
+		array_push($errorMessage, "!!CITY IS REQUIRED!!");
+		}
+	if(empty($_POST['state'])) {
+		array_push($errorMessage, "!!STATE IS REQUIRED!!");
+		}
+	if(empty($_POST['zip'])) {
+		array_push($errorMessage, "!!ZIP CODE IS REQUIRED!!");
+		}
+	if(empty($_POST['phone'])) {
+		array_push($errorMessage, "!!PHONE NUMBER IS REQUIRED!!");
+		}
+
 	array_push($address_book, $entry);
 	writeCSV($fileCSV, $address_book);
 
-}
+};
+
 
 ?>
 <!DOCTYPE>
@@ -60,8 +82,17 @@ if(!empty($_POST)) {
 			<? endforeach; ?>
 			
 	</table>
+	<ul>
+		<? if(!empty($errorMessage)) : ?>
+		<? foreach($errorMessage as $error) : ?>
+			<strong><em><li><?= $error; ?></li></em></strong>
+		<? endforeach; ?>
+		<? endif; ?>
+	</ul>
+	<hr>
+	<hr>
 	<h2>Add A New Address:</h2>
-	<form method ="POST" enctype="multipart/form-data" action="address_book.php" >
+	<form method ="POST" action="address_book.php" >
 			<p>
 				<label for="name"><strong>Name:</strong></label>
 				<input id="name" name="name" type="text" autofocus>
