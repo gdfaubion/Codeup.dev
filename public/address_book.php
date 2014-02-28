@@ -3,13 +3,20 @@ class addressDataStore {
 
 	public $filename = '';
 
+	function __construct($filename = 'data/address_book.csv') 
+	{
+		$this->filename = $filename;
+
+	}
+
 	function readCSV()
 	{
 		$address_book = [];
 		$handle = fopen($this->filename, "r");
 		while(!feof($handle)) {
 		$line = fgetcsv($handle);
-		if(!empty($line)) {
+		if(!empty($line)) 
+		{
 	  		$address_book[] = $line;
 			}
 		}
@@ -33,54 +40,64 @@ class addressDataStore {
 
 }
 
-//new instance of addressDataStore
 $contacts = new addressDataStore();
 
-//set the $filename var
-$contacts->filename = 'data/address_book.csv';
-
-//output $address list
 $address_book = $contacts->readCSV();
 
 $errorMessage = [];
 
-if(!empty($_POST)) {
-	$entry = [
-		$_POST['name'],
-		$_POST['address'],
-		$_POST['city'],
-		$_POST['state'],
-		$_POST['zip'],
-		$_POST['phone']
-		];
-	if(empty($_POST['name'])) {
-		array_push($errorMessage, "!!NAME IS REQUIRED!!");
+if(!empty($_POST))
+{
+	$entry = [];
+	$entry['name'] = $_POST['name'];
+	$entry['address'] = $_POST['address'];
+	$entry['city'] = $_POST['city'];
+	$entry['state'] = $_POST['state'];
+	$entry['zip'] = $_POST['zip'];
+
+	foreach($entry as $key => $value)
+	{
+		if(empty($value))
+		{
+			array_push($errorMessage, "!! " . strtoupper($key) . " IS REQUIRED !!");
 		}
-	if(empty($_POST['address'])) {
-		array_push($errorMessage, "!!ADDRESS IS REQUIRED!!");
-		}
-	if(empty($_POST['city'])) {
-		array_push($errorMessage, "!!CITY IS REQUIRED!!");
-		}
-	if(empty($_POST['state'])) {
-		array_push($errorMessage, "!!STATE IS REQUIRED!!");
-		}
-	if(empty($_POST['zip'])) {
-		array_push($errorMessage, "!!ZIP CODE IS REQUIRED!!");
-		}
-	if(empty($_POST['phone'])) {
-		array_push($errorMessage, "!!PHONE NUMBER IS REQUIRED!!");
-		}
+	};
 
 	array_push($address_book, $entry);
 	$contacts->writeCSV($address_book);
-
 };
-if(isset($_GET['remove'])) {
+if(isset($_GET['remove'])) 
+{
 	$remove_item = array_splice($address_book, $_GET['remove'], 1);
 	$contacts->writeCSV($address_book);
 	header("Location: address_book.php");
 	exit(0);
+}
+
+$errorMessageUpload = '';
+
+if(count($_FILES) > 0)
+{
+	if($_FILES['file']['error'] != 0) 
+	{
+		$errorMessageUpload = 'Error Uploading File!!';
+
+	}
+	elseif($_FILES['file']['type'] != 'text/csv')
+	{
+		$errorMessageUpload = 'Invalid File Type';
+	}
+	else
+	{
+		$upload_dir = '/vagrant/sites/codeup.dev/public/uploads/';
+		$filename = basename($_FILES['file']['name']);
+		$saved_filename = $upload_dir . $filename;
+		move_uploaded_file($_FILES['file']['tmp_name'], $saved_filename);
+		$fileContents = $contacts->readCSV($saved_filename);
+		$address_book = array_merge($address_book, $fileContents);
+		$contacts->writeCSV($address_book);
+	}
+
 }
 
 ?>
@@ -112,7 +129,7 @@ if(isset($_GET['remove'])) {
 	<hr>
 	<hr>
 	<h2>Add A New Contact:</h2>
-	<form method ="POST" action="address_book.php" >
+	<form method ="POST" enctype="multipart/form-data" action="address_book.php" >
 			<p>
 				<label for="name"><strong>Name:</strong></label>
 				<input id="name" name="name" type="text" autofocus>
@@ -137,8 +154,16 @@ if(isset($_GET['remove'])) {
 				<label for="phone"><strong>Phone Number:</strong></label>
 				<input id="phone" name="phone" type="text">
 			</p>
+
 			<p>
 				<button type="submit">Submit</button>
+			</p>
+			<p>
+				<label for="file">Upload Address File</label>
+				<input type="file" id="file" name="file">
+			</p>
+			<p>
+				<input type="submit" value="upload">
 			</p>
 	</form>
 </body>
