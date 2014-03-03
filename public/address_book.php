@@ -2,14 +2,18 @@
 
 require_once('classes/address_data_store.php');
 
-$contacts = new addressDataStore();
+$contacts = new addressDataStore('data/address_book.csv');
 
-$address_book = $contacts->readCSV();
+$address_book = $contacts->read_address_book();
 
 $errorMessage = [];
 
 if(!empty($_POST))
 {
+	if(isset($_POST['file2']) && $_POST['file2'] != 'on')
+	{
+		break 2;
+	}
 	$entry = [];
 	$entry['name'] = $_POST['name'];
 	$entry['address'] = $_POST['address'];
@@ -23,15 +27,20 @@ if(!empty($_POST))
 		{
 			array_push($errorMessage, "!! " . strtoupper($key) . " IS REQUIRED !!");
 		}
-	};
+	}
 
-	array_push($address_book, $entry);
-	$contacts->writeCSV($address_book);
-};
+	$entry['phone'] = $_POST['phone'];
+
+	if(empty($errorMessage))
+	{
+		array_push($address_book, $entry);
+		$contacts->write_address_book($address_book);
+	}	
+}
 if(isset($_GET['remove'])) 
 {
 	$remove_item = array_splice($address_book, $_GET['remove'], 1);
-	$contacts->writeCSV($address_book);
+	$contacts->write_address_book($address_book);
 	header("Location: address_book.php");
 	exit(0);
 }
@@ -40,7 +49,7 @@ $errorMessageUpload = '';
 
 if(count($_FILES) > 0)
 {
-	if($_FILES['file']['error'] != 0) 
+	if($_FILES['file']['error'] !== 0) 
 	{
 		$errorMessageUpload = 'Error Uploading File!!';
 
@@ -55,9 +64,17 @@ if(count($_FILES) > 0)
 		$filename = basename($_FILES['file']['name']);
 		$saved_filename = $upload_dir . $filename;
 		move_uploaded_file($_FILES['file']['tmp_name'], $saved_filename);
-		$fileContents = $contacts->readCSV($saved_filename);
-		$address_book = array_merge($address_book, $fileContents);
-		$contacts->writeCSV($address_book);
+		$contactsUpload = new addressDataStore($saved_filename);
+		$addressBookUpload = $contactsUpload->read_address_book();
+			if(isset($_POST['file2']) && $_POST['file2'] == 'on')
+			{
+				$address_book = $addressBookUpload;
+			}else
+			{
+				$address_book = array_merge($address_book, $addressBookUpload);
+			}
+		
+		$contacts->write_address_book($address_book);
 	}
 
 }
@@ -69,8 +86,14 @@ if(count($_FILES) > 0)
 	<title>Address Book</title>
 </head>
 <body>
-	<h2>Address Book:</h2>
+	<h2>Contacts:</h2>
 	<table>
+		<th><strong>Name:</strong></th>
+		<th><strong>Address:</strong></th>
+		<th><strong>City:</strong></th>
+		<th><strong>State:</strong></th>
+		<th><strong>zip:</strong></th>
+		<th><strong>Phone:</strong></th>
 			<? foreach ($address_book as $key => $entry) : ?>
 		<tr>
 			<? foreach ($entry as $item) : ?>
@@ -91,25 +114,26 @@ if(count($_FILES) > 0)
 	<hr>
 	<hr>
 	<h2>Add A New Contact:</h2>
+	<p>*Required Fields</p>
 	<form method ="POST" enctype="multipart/form-data" action="address_book.php" >
 			<p>
-				<label for="name"><strong>Name:</strong></label>
-				<input id="name" name="name" type="text" autofocus>
+				<label for="name"><strong>*Name:</strong></label>
+				<input id="name" name="name" type="text">
 			</p>
 			<p>
-				<label for="address"><strong>Address:</strong></label>
+				<label for="address"><strong>*Address:</strong></label>
 				<input id="address" name="address" type="text">
 			</p>
 			<p>
-				<label for="city"><strong>City:</strong></label>
+				<label for="city"><strong>*City:</strong></label>
 				<input id="city" name="city" type="text">
 			</p>
 			<p>
-				<label for="state"><strong>State:</strong></label>
+				<label for="state"><strong>*State:</strong></label>
 				<input id="state" name="state" type="text">
 			</p>
 			<p>
-				<label for="zip"><strong>Zip Code:</strong></label>
+				<label for="zip"><strong>*Zip Code:</strong></label>
 				<input id="zip" name="zip" type="text">
 			</p>
 			<p>
@@ -121,8 +145,12 @@ if(count($_FILES) > 0)
 				<button type="submit">Submit</button>
 			</p>
 			<p>
-				<label for="file">Upload Address File</label>
+				<label for="file">Upload Contacts from CSV File</label>
 				<input type="file" id="file" name="file">
+			</p>
+			<p>
+				<label for="file2">Replace All Contacts?</label>
+				<input id="file2" name="file2" type="checkbox">
 			</p>
 			<p>
 				<input type="submit" value="upload">
