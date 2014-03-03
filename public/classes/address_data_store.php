@@ -1,40 +1,24 @@
 <?php
-class addressDataStore {
+require_once('classes/filestore.php');
 
-	public $filename = '';
+class addressDataStore extends Filestore {
 
-	function __construct($filename = 'data/address_book.csv') 
+
+    function __construct($filename = '') 
+    {
+    	parent:: __construct(strtolower($filename));
+    }
+
+	function read_address_book()
 	{
-		$this->filename = $filename;
+		$contents = $this->read_csv($this->filename);
+		return $contents;
 
 	}
 
-	function readCSV()
+	function write_address_book($entries)
 	{
-		$address_book = [];
-		$handle = fopen($this->filename, "r");
-		while(!feof($handle)) {
-		$line = fgetcsv($handle);
-		if(!empty($line)) 
-		{
-	  		$address_book[] = $line;
-			}
-		}
-		fclose($handle);
-		return $address_book;
-
-	}
-
-	function writeCSV($entries)
-	{
-		$handle = fopen($this->filename, "w");
-
-		foreach ($entries as $entry) 
-		{
-			fputcsv($handle, $entry);
-		}
-
-		fclose($handle);
+		$this->write_csv($entries);
 
 	}
 
