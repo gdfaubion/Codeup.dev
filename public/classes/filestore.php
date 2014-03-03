@@ -10,7 +10,7 @@ class Filestore {
     {
         $this->filename = $filename;
 
-        if (substr($filename, -3) == 'csv') {
+        if (strtolower((substr($filename, -3))) == 'csv') {
             $this->is_csv = TRUE;
         }
 
