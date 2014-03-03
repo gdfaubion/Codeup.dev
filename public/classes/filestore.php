@@ -14,11 +14,12 @@ class Filestore {
      */
     function read_lines()
     {
-        if(filesize($this->filename) > 0){
-        $handle = fopen($this->filename, "r");
-        $contents = fread($handle, filesize($this->filename));
-        fclose($handle);
-        return explode("\n", $contents);
+        if(filesize($this->filename) > 0) 
+        {
+            $handle = fopen($this->filename, "r");
+            $contents = fread($handle, filesize($this->filename));
+            fclose($handle);
+            return explode("\n", $contents);
         } else {
             return array();
         }
