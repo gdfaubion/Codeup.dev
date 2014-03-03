@@ -6,18 +6,21 @@ $readOrWrite = new fileStore('data/tododata.txt');
 $archiveFile = new filestore("data/archives.txt");
 $archives = $archiveFile->read();
 $items = $readOrWrite->read();
-// add items to list	
-if (!empty($_POST['newItem'])) {
-	if(strlen($_POST['newItem']) > 240){
-		throw new Exception("Error New Item can't be more than 240 characters.");
-		
-	}
-	array_push($items, $_POST['newItem']);
-	$readOrWrite->write($items);
-	header("Location: todo-list.php");
-	exit;
+// add items to list
+try {	
+	if (!empty($_POST['newItem'])) {
+		if(strlen($_POST['newItem']) > 240){
+			throw new Exception("*Error New Item can't be more than 240 characters.");
+			
+		}
+		array_push($items, $_POST['newItem']);
+		$readOrWrite->write($items);
+		header("Location: todo-list.php");
+		exit;
 }
-
+} catch(Exception $e) {
+	$errorCatch = $e->getMessage();
+}
 // remove items from list
 if (isset($_GET['remove'])) {
 	$archiveItem = array_splice($items, $_GET['remove'], 1);
@@ -49,7 +52,7 @@ if (count($_FILES) > 0) {
 			$items = array_merge($items, $fileContents);
 		}
 
-	$readOrWrite->write($items);		
+		$readOrWrite->write($items);		
 		header("Location: todo-list.php");
 		exit;
 	}
@@ -72,6 +75,11 @@ if (count($_FILES) > 0) {
 		</ul>
 		<hr>
 		<h2>Add Items to the To-Do List:</h2>
+		<p>
+			<? if(!empty($errorCatch)) : ?>
+			<?= $errorCatch; ?>
+			<? endif; ?>
+		</p>
 		<form method="POST" enctype="multipart/form-data" action="todo-list.php">
 			<p>
 				<label for="newItem"><strong>New Item:</strong></label>

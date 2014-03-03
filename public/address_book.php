@@ -7,7 +7,7 @@ $contacts = new addressDataStore('data/address_book.csv');
 $address_book = $contacts->read_address_book();
 
 $errorMessage = [];
-
+try {
 if(!empty($_POST))
 {
 	if(isset($_POST['file2']) && $_POST['file2'] != 'on')
@@ -15,11 +15,11 @@ if(!empty($_POST))
 		break 2;
 	}
 	$entry = [];
-	$entry['name'] = $_POST['name'];
-	$entry['address'] = $_POST['address'];
-	$entry['city'] = $_POST['city'];
-	$entry['state'] = $_POST['state'];
-	$entry['zip'] = $_POST['zip'];
+	$entry['Name'] = $_POST['name'];
+	$entry['Address'] = $_POST['address'];
+	$entry['City'] = $_POST['city'];
+	$entry['State'] = $_POST['state'];
+	$entry['Zip'] = $_POST['zip'];
 	foreach($entry as $key => $value)
 	{
 		if(empty($value))
@@ -28,7 +28,7 @@ if(!empty($_POST))
 		}
 		if(strlen($value) > 125) 
 		{
-			throw new Exception("Error entry can't be more than 125 characters.");
+			throw new Exception(" *$key can't be more than 125 characters.");
 			
 		}
 	}
@@ -47,6 +47,9 @@ if(isset($_GET['remove']))
 	$contacts->write_address_book($address_book);
 	header("Location: address_book.php");
 	exit(0);
+}
+} catch (Exception $e) {
+	$errorCatch = $e->getMessage();
 }
 
 $errorMessageUpload = '';
@@ -119,6 +122,11 @@ if(count($_FILES) > 0)
 	<hr>
 	<h2>Add A New Contact:</h2>
 	<p>*Required Fields</p>
+	<P>
+		<?if (!empty($errorCatch)) : ?>
+		<?= $errorCatch; ?>
+		<? endif; ?>
+	</P>
 	<form method ="POST" enctype="multipart/form-data" action="address_book.php" >
 			<p>
 				<label for="name"><strong>*Name:</strong></label>
