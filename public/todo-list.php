@@ -6,8 +6,12 @@ $readOrWrite = new fileStore('data/tododata.txt');
 $archiveFile = new filestore("data/archives.txt");
 $archives = $archiveFile->read();
 $items = $readOrWrite->read();
-// add items to list
+// add items to list	
 if (!empty($_POST['newItem'])) {
+	if(strlen($_POST['newItem']) > 240){
+		throw new Exception("Error New Item can't be more than 240 characters.");
+		
+	}
 	array_push($items, $_POST['newItem']);
 	$readOrWrite->write($items);
 	header("Location: todo-list.php");

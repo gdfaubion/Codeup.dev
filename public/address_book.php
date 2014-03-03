@@ -20,12 +20,16 @@ if(!empty($_POST))
 	$entry['city'] = $_POST['city'];
 	$entry['state'] = $_POST['state'];
 	$entry['zip'] = $_POST['zip'];
-
 	foreach($entry as $key => $value)
 	{
 		if(empty($value))
 		{
 			array_push($errorMessage, "!! " . strtoupper($key) . " IS REQUIRED !!");
+		}
+		if(strlen($value) > 125) 
+		{
+			throw new Exception("Error entry can't be more than 125 characters.");
+			
 		}
 	}
 
