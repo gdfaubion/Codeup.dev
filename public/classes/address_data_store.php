@@ -11,14 +11,14 @@ class addressDataStore extends Filestore {
 
 	function read_address_book()
 	{
-		$contents = $this->read_csv($this->filename);
+		$contents = $this->read($this->filename);
 		return $contents;
 
 	}
 
 	function write_address_book($entries)
 	{
-		$this->write_csv($entries);
+		$this->write($entries);
 
 	}
 

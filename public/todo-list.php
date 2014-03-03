@@ -4,14 +4,12 @@ require_once('classes/filestore.php');
 $readOrWrite = new fileStore('data/tododata.txt');
 
 $archiveFile = new filestore("data/archives.txt");
-$archives = $archiveFile->read_lines();
-// check that file is not empty
-// $items = (filesize($file) > 0) ? $readOrWrite->read_lines($this->filename) : array();
-$items = $readOrWrite->read_lines();
+$archives = $archiveFile->read();
+$items = $readOrWrite->read();
 // add items to list
 if (!empty($_POST['newItem'])) {
 	array_push($items, $_POST['newItem']);
-	$readOrWrite->write_lines($items);
+	$readOrWrite->write($items);
 	header("Location: todo-list.php");
 	exit;
 }
@@ -20,14 +18,10 @@ if (!empty($_POST['newItem'])) {
 if (isset($_GET['remove'])) {
 	$archiveItem = array_splice($items, $_GET['remove'], 1);
 	$archives = array_merge($archives, $archiveItem);
-	$archiveFile->write_lines($archives);
-	$readOrWrite->write_lines($items);
+	$archiveFile->write($archives);
+	$readOrWrite->write($items);
 	header("Location: todo-list.php");
 	exit;
-	// $remove_item = array_splice($items, $_GET['remove'], 1);
-	// $readOrWrite->write_lines($items);
-	// header("Location: todo-list.php");
-	// exit(0);
 }
 
 $errorMessage = '';
@@ -43,7 +37,7 @@ if (count($_FILES) > 0) {
 		$saved_filename = $upload_dir . $filename;
 		move_uploaded_file($_FILES['file1']['tmp_name'], $saved_filename);
 		$uploadedList = new Filestore($saved_filename);
-		$fileContents =$uploadedList->read_lines();
+		$fileContents =$uploadedList->read();
 	
 		if ($_POST['file2'] == TRUE) {
 			$items = $fileContents;
@@ -51,7 +45,7 @@ if (count($_FILES) > 0) {
 			$items = array_merge($items, $fileContents);
 		}
 
-	$readOrWrite->write_lines($items);		
+	$readOrWrite->write($items);		
 		header("Location: todo-list.php");
 		exit;
 	}
