@@ -60,12 +60,10 @@ class Filestore {
     function write_csv($arrays)
     {
         $handle = fopen($this->filename, "w");
-
         foreach ($arrays as $array) 
         {
             fputcsv($handle, $array);
         }
-
         fclose($handle);
 
     }
