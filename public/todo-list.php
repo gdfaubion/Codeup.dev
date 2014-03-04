@@ -7,19 +7,21 @@ $archiveFile = new filestore("data/archives.txt");
 $archives = $archiveFile->read();
 $items = $readOrWrite->read();
 // add items to list
-try {	
-	if (!empty($_POST['newItem'])) {
-		if(strlen($_POST['newItem']) > 240){
+if (isset($_POST['newItem'])) {
+	try {
+		if (strlen($_POST['newItem']) > 240) {
 			throw new Exception("*Error New Item can't be more than 240 characters.");
-			
+		} elseif (empty($_POST['newItem'])) {
+			throw new Exception("*You must enter a new item before hitting submit!");
+		} else {
+			array_push($items, $_POST['newItem']);
+			$readOrWrite->write($items);
+			header("Location: todo-list.php");
+			exit;
 		}
-		array_push($items, $_POST['newItem']);
-		$readOrWrite->write($items);
-		header("Location: todo-list.php");
-		exit;
-}
-} catch(Exception $e) {
-	$errorCatch = $e->getMessage();
+	} catch (Exception $e) {
+		$errorCatch = $e->getMessage();
+	}
 }
 // remove items from list
 if (isset($_GET['remove'])) {
@@ -33,7 +35,7 @@ if (isset($_GET['remove'])) {
 
 $errorMessage = '';
 // upload file, if not empty and is text file
-if (count($_FILES) > 0) {
+if (count($_FILES) > 0 && empty($_POST['newItem'])) {
 	if($_FILES['file1']['error'] != 0) {
 		$errorMessage = 'Error Uploading File!!';
 	} elseif ($_FILES['file1']['type'] != 'text/plain') {
@@ -75,16 +77,20 @@ if (count($_FILES) > 0) {
 		</ul>
 		<hr>
 		<h2>Add Items to the To-Do List:</h2>
-		<p>
-			<? if(!empty($errorCatch)) : ?>
-			<?= $errorCatch; ?>
-			<? endif; ?>
-		</p>
 		<form method="POST" enctype="multipart/form-data" action="todo-list.php">
 			<p>
 				<label for="newItem"><strong>New Item:</strong></label>
 				<input id="newItem" name="newItem" type="text" autofocus="autofocus">
 			</p>
+			<p>
+				<? if(!empty($errorCatch)) : ?>
+				<?= $errorCatch; ?>
+				<? endif; ?>
+			</p>
+			<p>
+				<button type="submit">Submit</button>
+			</p>
+		<form method="POST" enctype="multipart/form-data" action="todo-list.php">
 			<p>
 				<? if (!empty($errorMessage)) : ?>
 				<?= $errorMessage; ?>
