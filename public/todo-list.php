@@ -104,7 +104,7 @@ if (count($_FILES) > 0 && empty($_POST['newItem'])) {
     			<label for='file2'>Replace to do all To-Do items?</label>
     			<input id='file2' name='file2' type='checkbox'>
     		</p>
-			<button type="submit">Submit</button>
+			<button type="submit">Upload</button>
 		</form>
 
 </body>
