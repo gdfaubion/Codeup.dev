@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>JavaScript Objects</title>
+</head>
+<body>
+	<script>
+		var person = {};
+		person.firstName = "Grace";
+		person.lastName = "Faubion";
+		person.sayHello = function() {
+			alert('Hello ' + this.firstName + ' ' + this.lastName);
+		};
+		person.sayHello();
+	</script>
+</body>
+</html>
