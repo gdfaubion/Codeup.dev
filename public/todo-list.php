@@ -1,6 +1,8 @@
 <?php
 require_once('classes/filestore.php');
 
+class InvalidInputException extends Exception{}
+
 $readOrWrite = new fileStore('data/tododata.txt');
 
 $archiveFile = new filestore("data/archives.txt");
@@ -10,16 +12,16 @@ $items = $readOrWrite->read();
 if (isset($_POST['newItem'])) {
 	try {
 		if (strlen($_POST['newItem']) > 240) {
-			throw new Exception("*Error New Item can't be more than 240 characters.");
+			throw new InvalidInputException("*Error New Item can't be more than 240 characters.");
 		} elseif (empty($_POST['newItem'])) {
-			throw new Exception("*You must enter a new item before hitting submit!");
+			throw new InvalidInputException("*You must enter a new item before hitting submit!");
 		} else {
 			array_push($items, $_POST['newItem']);
 			$readOrWrite->write($items);
 			header("Location: todo-list.php");
 			exit;
 		}
-	} catch (Exception $e) {
+	} catch (InvalidInputException $e) {
 		$errorCatch = $e->getMessage();
 	}
 }

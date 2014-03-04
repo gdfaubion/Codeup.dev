@@ -2,6 +2,8 @@
 
 require_once('classes/address_data_store.php');
 
+class InvalidInputException extends Exception{}
+
 $contacts = new addressDataStore('data/address_book.csv');
 
 $address_book = $contacts->read_address_book();
@@ -28,7 +30,7 @@ if(!empty($_POST))
 		}
 		if(strlen($value) > 125) 
 		{
-			throw new Exception(" *$key can't be more than 125 characters.");
+			throw new InvalidInputException(" *$key can't be more than 125 characters.");
 			
 		}
 	}
@@ -48,7 +50,7 @@ if(isset($_GET['remove']))
 	header("Location: address_book.php");
 	exit(0);
 }
-} catch (Exception $e) {
+} catch (InvalidInputException $e) {
 	$errorCatch = $e->getMessage();
 }
 
