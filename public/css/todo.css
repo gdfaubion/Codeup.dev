@@ -1,0 +1,26 @@
+body{
+	background-image: url("/img/checklist-512.png");
+	background-repeat: no-repeat;
+	background-position: right;
+	margin-right: 200px; 
+	background-attachment: fixed;
+	background-color:rgb(245, 245, 245);
+	text-align: center;
+
+}
+.header-color{
+	color:rgb(4, 25, 110);
+	text-decoration: underline;
+	font-family: 'Oregano', cursive;
+	font-size: 3em;
+}
+ul {
+	list-style: square;
+	list-style-position: inside;
+	font-family: 'Oregano', cursive;
+	font-size: 2em;
+}
+form {
+	font-family: 'Oregano', cursive;
+	font-size: 2em;
+}
