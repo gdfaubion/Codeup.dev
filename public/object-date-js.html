@@ -35,14 +35,14 @@
 		// See link below for methods needed:
 		// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date#Getter
 		console.log('Here is my birthday using vanilla js: ');
-		console.log(month[jsBirthday.getMonth()]+" "+jsBirthday.getDate()+" "+jsBirthday.getFullYear());
+		console.log(months[jsBirthday.getMonth()]+" "+jsBirthday.getDate()+" "+jsBirthday.getFullYear());
 
 		// create the date corresponding to your birthday using Moment.js.
 		var momentBirthday = moment("9-2-1987", "MM-DD-YYYY");
 
 		// todo:
 		// Log your birthday in the format: January 1, 2014 using Moment.js.
-		console.log('Here is my birthday using Moment.js: ' + momentBirthday);
+		console.log('Here is my birthday using Moment.js: ' + momentBirthday.format("MM-DD-YYYY"));
 	</script>
 </body>
 </html>
