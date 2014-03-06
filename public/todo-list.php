@@ -76,7 +76,7 @@ if (count($_FILES) > 0 && empty($_POST['newItem'])) {
 	<h1 class="header-color" >TO-DO List</h1>
 		<ul>
 			<? foreach ($items as $key => $item): ?>
-				<li><?= htmlspecialchars(strip_tags($item)); ?> <a href="?remove=<?= $key; ?>">To-Done! </a></li>
+				<li><?= htmlspecialchars(strip_tags($item)); ?> <a id="link" href="?remove=<?= $key; ?>">To-Done! </a></li>
 			<? endforeach; ?>
 		</ul>
 		<h2 class="header-color" >Add New To-Do:</h2>

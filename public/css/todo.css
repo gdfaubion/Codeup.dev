@@ -14,7 +14,7 @@ body{
 	font-family: 'Oregano', cursive;
 	font-size: 3em;
 }
-ul {
+ul{
 	list-style: square;
 	list-style-position: inside;
 	font-family: 'Oregano', cursive;
@@ -23,4 +23,8 @@ ul {
 form {
 	font-family: 'Oregano', cursive;
 	font-size: 2em;
+}
+#link {
+	color:rgb(75, 0, 0);
+
 }
