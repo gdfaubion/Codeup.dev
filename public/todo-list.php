@@ -68,17 +68,18 @@ if (count($_FILES) > 0 && empty($_POST['newItem'])) {
 <html>
 <head>
 	<title>TODO List</title>
+	<link rel="stylesheet" href="/css/todo.css">
+	<link href='http://fonts.googleapis.com/css?family=Oregano' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-	<h2>TO-DO List</h2>
+	<h1 class="header-color" >TO-DO List</h1>
 		<ul>
 			<? foreach ($items as $key => $item): ?>
 				<li><?= htmlspecialchars(strip_tags($item)); ?> <a href="?remove=<?= $key; ?>">To-Done! </a></li>
 			<? endforeach; ?>
 		</ul>
-		<hr>
-		<h2>Add Items to the To-Do List:</h2>
+		<h2 class="header-color" >Add New To-Do:</h2>
 		<form method="POST" enctype="multipart/form-data" action="todo-list.php">
 			<p>
 				<label for="newItem"><strong>New Item:</strong></label>
