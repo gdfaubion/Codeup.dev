@@ -72,7 +72,6 @@ if (count($_FILES) > 0 && empty($_POST['newItem'])) {
 	<link href='http://fonts.googleapis.com/css?family=Oregano' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
 	<h1 class="header-color" >TO-DO List</h1>
 		<ul>
 			<? foreach ($items as $key => $item): ?>
@@ -109,6 +108,5 @@ if (count($_FILES) > 0 && empty($_POST['newItem'])) {
     		</p>
 			<button type="submit">Upload</button>
 		</form>
-
 </body>
 </html>
