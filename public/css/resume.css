@@ -1,14 +1,22 @@
 	i{
-
 		font-size: 3em;
 	}
 
 	ul{
-
 		list-style-image: 
 	}
 
-	body{
+	/*body{
+		background-color: #F0F6FD;
+	}
+	*/
+	.label{
+		font-size: 1em;
 
-		background-color: #F5FCFB;
+	}
+	.page-header{
+		text-align: center;
+	}
+	.glyphicon{
+		font-size: 1em;
 	}

@@ -1,0 +1,10 @@
+/*	body{
+			background-color: #F0F6FD;
+	}*/
+	.carousel-inner > .item > img {
+    margin: 0 auto;
+	}
+	.jumbotron{
+		background-color: #F0F6FD;
+	}
+	
