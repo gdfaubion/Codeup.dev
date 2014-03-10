@@ -19,9 +19,7 @@
 
         function autosave() {
         	clearTimeout(timeoutID);
-        	timeoutID = setTimeout(function () {
-	        	save();
-	        }, delay);
+        	timeoutID = setTimeout(save, delay);
         }
 
         // don't modify the line below
