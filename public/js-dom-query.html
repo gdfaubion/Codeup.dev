@@ -24,7 +24,7 @@
         var mainHeader = document.getElementById('main-header');
         // todo: set inner html of mainHeader to "JavaScript is Cool"
         var btn1 = document.getElementById('change-header-text');
-        var changeText = function(event) {
+         function changeText() {
             mainHeader.innerHTML = 'JavaScript is Cool';
         }
         btn1.addEventListener('click', changeText, false);
@@ -34,7 +34,7 @@
 
         var btn2 = document.getElementById('change-sub-header');
 
-        var changeSubHeader = function(event) {
+         function changeSubHeader() {
             subHeader.style['color'] = 'blue';
         }
         btn2.addEventListener('click', changeSubHeader, false);
@@ -48,7 +48,7 @@
         var btn3 = document.getElementById('list-text-color');
         // todo: set text color on every other list item to grey
         // todo: set text color of li with dbid = 1 to blue
-        var changeListText = function(event) {
+         function changeListText() {
                 for(var i = 0; i < listItems.length; i++) {
 
                 var dbId = listItems[i].attributes['data-dbid'].value;
@@ -67,7 +67,7 @@
         var btn4 = document.getElementById('change-paragraph')
 
         // todo: change the text in the first sub paragraph to "Mission Accomplished!"
-        var changeParagraphText = function(event) {
+         function changeParagraphText() {
             subParagraphs[0].innerHTML = 'Mission Accomplished!'
         }
 
