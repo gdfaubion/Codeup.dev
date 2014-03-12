@@ -1,0 +1,10 @@
+INSERT INTO albums(name, year, artist)VALUES('Thriller', 1982, 'Michael Jackson');
+INSERT INTO albums(name, year, artist)VALUES('The Dark Side of the Moon', 1973, 'Pink Floyd');
+INSERT INTO albums(name, year, artist)VALUES('Their Greatest Hits', 1976, 'Eagles');
+INSERT INTO albums(name, year, artist)VALUES('The Bodyguard', 1992, 'Whitney Houston');
+INSERT INTO albums(name, year, artist)VALUES('Back in Black', 1980, 'AC/DC');
+INSERT INTO albums(name, year, artist)VALUES('Saturday Night Fever', 1977, 'Bee Gees');
+INSERT INTO albums(name, year, artist)VALUES('Rumours', 1977, 'Fleetwood Mac');
+INSERT INTO albums(name, year, artist)VALUES('Come On Over', 1997 'Shania Twain');
+INSERT INTO albums(name, year, artist)VALUES('Led Zeplin IV', 1971 'Led Zeplin');
+INSERT INTO albums(name, year, artist)VALUES('Bat Out of Hell', 1977 'Meat Loaf');
