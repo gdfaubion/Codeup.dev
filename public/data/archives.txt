@@ -48,3 +48,6 @@ Fold the laundry
 Feed the dog
 Fold the laundry
 Buy more coffee
+Feed the dog
+Do the laundry
+Buy groceries
