@@ -12,7 +12,7 @@
 		$stmt = $mysqli->prepare("INSERT INTO national_parks (name, location, description, date_established, area_in_acres) VALUES (?, ?, ?, ?, ?)");
 
 		// bind parameters
-		$stmt->bind_param("sssdi", $_POST['name'], $_POST['location'], $_POST['description'], $_POST['date'], $_POST['area']);
+		$stmt->bind_param("ssssi", $_POST['name'], $_POST['location'], $_POST['description'], $_POST['date'], $_POST['area']);
 
 		// execute query, return result
 		$stmt->execute();
@@ -133,12 +133,14 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="area">Area in Acres*</label>
-			    <input type="number" class="form-control" name="area" id="area" placeholder="Area">
+			    <input type="number" step="any" min="0" class="form-control" name="area" id="area" placeholder="Area">
 			  </div>
 			  <button type="submit" class="btn btn-default">Submit</button>
 			</form>
 			<br>
 			<img src="/img/parks.jpg">
+			<br>
+			<p>*All information used was taken from <a href="http://en.wikipedia.org/wiki/List_of_national_parks_of_the_United_States">Wikipedia</a>.</p>
 		</div>
 	</div> 
 </body>
