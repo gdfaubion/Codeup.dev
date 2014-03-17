@@ -1,4 +1,5 @@
 <?php
+	class InvalidInputException extends Exception {}
 
 	$mysqli = new mysqli('127.0.0.1', 'codeup', 'password', 'codeup_mysqli_test_db');
 
@@ -6,18 +7,22 @@
 	if ($mysqli->connect_error) {
 	    echo 'Failed to connect to MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
 	}
-
 	if(!empty($_POST)) {
-		// Create the prepared statement
-		$stmt = $mysqli->prepare("INSERT INTO national_parks (name, location, description, date_established, area_in_acres) VALUES (?, ?, ?, ?, ?)");
 
-		// bind parameters
-		$stmt->bind_param("ssssi", $_POST['name'], $_POST['location'], $_POST['description'], $_POST['date'], $_POST['area']);
+		if(empty($_POST['name']) || empty($_POST['location']) || empty($_POST['description']) || empty($_POST['date']) || empty($_POST['area'])) {
+			$error = ("*ERROR All Fields are Required!");
 
-		// execute query, return result
-		$stmt->execute();
+		} elseif(!empty($_POST['name']) && !empty($_POST['location']) && !empty($_POST['description']) && !empty($_POST['date']) && !empty($_POST['area']) ) {
+			// Create the prepared statement
+			$stmt = $mysqli->prepare("INSERT INTO national_parks (name, location, description, date_established, area_in_acres) VALUES (?, ?, ?, ?, ?)");
+
+			// bind parameters
+			$stmt->bind_param("ssssd", $_POST['name'], $_POST['location'], $_POST['description'], $_POST['date'], $_POST['area']);
+
+			// execute query, return result
+			$stmt->execute();
+		}
 	}
-
 	if (!empty($_GET)) {
 		$result = $mysqli->query("SELECT * FROM national_parks ORDER BY {$_GET['sort_col']} {$_GET['sort_order']} ");
 	} else {
@@ -35,6 +40,9 @@
 	<style type="text/css">
 		body{
 			font-family: 'Belgrano', serif;
+		}
+		#error{
+			color: red;
 		}
 	</style>	
 </head>
@@ -114,6 +122,11 @@
 			<div class="page-header">
 			  <h3>Add A New National Park</h3>
 			</div>
+			<p id="error">
+				<? if(!empty($error)) : ?>
+				<?= $error; ?>
+				<? endif; ?>
+			</p>
 			<form role="form" method="POST" enctype="multipart/form-data" action="national_parks.php">
 			  <div class="form-group">
 			    <label for="name">Name of Park*</label>
