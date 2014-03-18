@@ -52,9 +52,6 @@
 			  <h1>ToDo List!</h1>
 			</div>
 			<table class="table table-striped table-hover table-bordered ">
-				<tr>
-					<th>To Do List Items:</th>
-				</tr>
 				<?php foreach($rows as $key => $value) : ?>
 				<tr>
 					<td><?= $value['entry']; ?><br><br><button type="button" class="btn btn-danger btn-sm" onclick="removeById(<?= $value['id']; ?>)"><span class="glyphicon glyphicon-trash"></span></button></td>
@@ -118,8 +115,10 @@
 		var removeId = document.getElementById('removeId');
  
 		function removeById(id) {
+			if(confirm('Are you sure you want to remove item ?')) {
 			removeId.value = id;
 			form.submit();
+			}
 		}
 	</script>
 </html>
