@@ -38,7 +38,7 @@
             <li><a href="#">Address Book</a></li>
             <li><a href="#">To-Do List</a></li>
             <li><a href="#">Blackjack</a></li>
-            <li><a href="#">National Parks</a></li>
+            <li><a href="http://codeup.dev/national_parks.php">National Parks</a></li>
             <!-- <li><a href="#"></a></li>
             <li class="divider"></li>
             <li><a href="#"></a></li> -->
@@ -55,16 +55,24 @@
 				<tr>
 					<th>To Do List Items:</th>
 				</tr>
-				<?php while($row = $result->fetch_assoc()): ?>
+				<?php foreach($rows as $key => $value) : ?>
 				<tr>
-					<td><?= $row['entry']; ?><br><br><a href="?remove=<?= $row['id']; ?>"><span class="glyphicon glyphicon-trash"></span></a></td>
+					<td><?= $value['entry']; ?><br><br><button type="button" class="btn btn-danger btn-sm" onclick="removeById(<?= $value['id']; ?>)"><span class="glyphicon glyphicon-trash"></span></button></td>
 				</tr>
-	<? endwhile; ?>
+	<? endforeach; ?>
 			</table>
 			<div>
 				<ul class="pager">
-				  <li><a href="#">Previous</a></li>
-				  <li><a href="#">Next</a></li>
+					<li>
+				<? if($page > 1) : ?>
+				  <? $page_no = $page-1; ?><a href="?page=<?= $page_no; ?>"><span class="glyphicon glyphicon-chevron-left arrow"></span></a>
+					</li>
+				<? endif; ?>
+					<li>
+				<? if($page < $num_pages) : ?>
+				  	<? $page_no = $page + 1; ?><a href="?page=<?= $page_no; ?>"><span class="glyphicon glyphicon-chevron-right arrow"></span></a>
+				  </li>
+				<? endif; ?>
 				</ul>
 			</div>	
 		</div>
@@ -86,15 +94,32 @@
 					<label for="newItem"><strong>New Item:</strong></label>
 					<input id="newItem" name="newItem" type="text">
 					<br>
-					<label for="file1"></label>
-        			<input id="file1" name="file1" type="file">
-				</div>	
-    			<div class="form-group">
 					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>	
+				<div class="page-header">
+				  <h3>Upload a File!</h3>
 				</div>
+    			<div class="form-group">
+    				<label for="file1"></label>
+        			<input id="file1" name="file1" type="file">
+        			<br>
+					<button type="submit" class="btn btn-primary">Upload</button>
+				</div>
+			</form>
+			<form id="removeForm" action="todo_list.php" method="post">
+				<input id="removeId" type="hidden" name="remove" value="">
 			</form>
 		</div>			
 </body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
+	<script>
+		var form = document.getElementById('removeForm');
+		var removeId = document.getElementById('removeId');
+ 
+		function removeById(id) {
+			removeId.value = id;
+			form.submit();
+		}
+	</script>
 </html>
