@@ -1,5 +1,4 @@
 <?php
-	class InvalidInputException extends Exception {}
 
 	$mysqli = new mysqli('127.0.0.1', 'codeup', 'password', 'codeup_mysqli_test_db');
 
@@ -7,6 +6,7 @@
 	if ($mysqli->connect_error) {
 	    echo 'Failed to connect to MySQL: (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error;
 	}
+
 	if(!empty($_POST)) {
 
 		if(empty($_POST['name']) || empty($_POST['location']) || empty($_POST['description']) || empty($_POST['date']) || empty($_POST['area'])) {
@@ -23,6 +23,7 @@
 			$stmt->execute();
 		}
 	}
+	
 	if (!empty($_GET)) {
 		$result = $mysqli->query("SELECT * FROM national_parks ORDER BY {$_GET['sort_col']} {$_GET['sort_order']} ");
 	} else {
