@@ -103,7 +103,7 @@
 					<button type="submit" class="btn btn-primary">Upload</button>
 				</div>
 			</form>
-			<form id="removeForm" action="todo_list.php" method="post">
+			<form id="removeForm" action="todo_list_db.php" method="post">
 				<input id="removeId" type="hidden" name="remove" value="">
 			</form>
 		</div>			
