@@ -84,7 +84,7 @@
 			<form role="form" method="POST" enctype="multipart/form-data" action="todo_list.php">
 				<div class="form-group">
 					<label for="newItem"><strong>New Item:</strong></label>
-					<input id="newItem" name="newItem" type="text" autofocus="autofocus">
+					<input id="newItem" name="newItem" type="text">
 					<br>
 					<label for="file1"></label>
         			<input id="file1" name="file1" type="file">

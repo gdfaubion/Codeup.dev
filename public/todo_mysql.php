@@ -28,9 +28,9 @@
 
 	$errorMessage = '';
 
-	if (count($_FILES) > 0 && empty($_POST['newItem'])) {
+	if (count($_FILES) > 0) {
 		if($_FILES['file1']['error'] != 0) {
-			$errorMessage = 'Error Uploading File!!';
+			$errorMessage = 'Error!! Could not process request!';
 		} elseif ($_FILES['file1']['type'] != 'text/plain') {
 			$errorMessage = 'ERROR!! Invalid File!';
 		} else {
