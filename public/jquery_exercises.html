@@ -7,20 +7,23 @@
 	<style>
 		body{
 			color: blue;
-			background-color: black;
+			/*background-color: black;*/
 		}
 		h1{
 			text-align: center;
+		}
+		.clickable{
+			cursor: pointer;
 		}
 	</style>
 </head>
 <body>
 	<div>
-  		<h1 id="header" class="codeup">The Ocean is Neat, but also Scary!</h1>
+  		<h1 id="header" class="codeup clickable">The Ocean is Neat, but also Scary!</h1>
 	</div>
 	<div class="col-md-6">
 		<h2>The Ocean Defined:</h2>
-		<p id="about" class="codeup">An ocean is a body of saline water that composes much of a planet's hydrosphere. On Earth, an ocean is one of the major conventional divisions of the World Ocean, which occupies two-thirds of planet's surface.</p>
+		<p id="about" class="codeup clickable">An ocean is a body of saline water that composes much of a planet's hydrosphere. On Earth, an ocean is one of the major conventional divisions of the World Ocean, which occupies two-thirds of planet's surface.</p>
 		<h2>The Five Major Oceans</h2>
 		<ul class="list codeup">
 			<li>Pacific Ocean</li>
@@ -34,9 +37,22 @@
 		<img src="/img/Ocean2.jpg">
 	</div>
 	<script>
-		$('li').css('font-size', '20px');
-		$('li, p, h1').css("background-color", "#FF0");
-		alert($('#header').html());
+		$('h1').click(function(){
+			$(this).css('background-color', 'black');
+		});
+
+		$('p').dblclick(function() {
+			$(this).css('font-size', '18px');
+		})
+
+		$('li').hover(
+			function(){
+				$(this).css('background-color', 'red');
+			},
+			function(){
+				$(this).css('background-color', 'none');
+			}
+		);
 
 	</script>
 </body>
