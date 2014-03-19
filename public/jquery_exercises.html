@@ -1,13 +1,45 @@
 <html>
 <head>
 	<title>Jquery Test</title>
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<style>
+		body{
+			color: blue;
+			background-color: black;
+		}
+		h1{
+			text-align: center;
+		}
+	</style>
 </head>
 <body>
+	<div class="page-header">
+  		<h1 id="header">The Ocean is Neat, but also Scary!</h1>
+	</div>
+	<div class="col-md-6">
+		<h2>The Ocean Defined:</h2>
+		<p id="about">An ocean is a body of saline water that composes much of a planet's hydrosphere. On Earth, an ocean is one of the major conventional divisions of the World Ocean, which occupies two-thirds of planet's surface.</p>
+		<h2>The Five Major Oceans</h2>
+		<ol class="list">
+			<li>Pacific Ocean</li>
+			<li>Atlantic Ocean</li>
+			<li>Indian Ocean</li>
+			<li>Southern Ocean</li>
+			<li>Arctic Ocean</li>
+		</ol>
+	</div>
+	<div class="col-md-6">
+		<img src="/img/Ocean2.jpg">
+	</div>
 	<script src="/js/jquery.js"></script>
 	<script>
-		$(document).ready(function() {
-		    alert( 'The DOM has finished loading!' );
+		$('document').ready(function() {
+		    var contents = $('#header');
+		    alert(contents.html());
 		});
 	</script>
 </body>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </html>
