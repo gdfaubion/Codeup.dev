@@ -14,14 +14,14 @@
 	</style>
 </head>
 <body>
-	<div class="page-header">
-  		<h1 id="header">The Ocean is Neat, but also Scary!</h1>
+	<div>
+  		<h1 id="header" class="codeup">The Ocean is Neat, but also Scary!</h1>
 	</div>
 	<div class="col-md-6">
 		<h2>The Ocean Defined:</h2>
-		<p id="about">An ocean is a body of saline water that composes much of a planet's hydrosphere. On Earth, an ocean is one of the major conventional divisions of the World Ocean, which occupies two-thirds of planet's surface.</p>
+		<p id="about" class="codeup">An ocean is a body of saline water that composes much of a planet's hydrosphere. On Earth, an ocean is one of the major conventional divisions of the World Ocean, which occupies two-thirds of planet's surface.</p>
 		<h2>The Five Major Oceans</h2>
-		<ol class="list">
+		<ol class="list codeup">
 			<li>Pacific Ocean</li>
 			<li>Atlantic Ocean</li>
 			<li>Indian Ocean</li>
@@ -35,8 +35,8 @@
 	<script src="/js/jquery.js"></script>
 	<script>
 		$('document').ready(function() {
-		    var contents = $('#header');
-		    alert(contents.html());
+		    var contents = $('.codeup');
+		    contents.css("border", "1px red solid");
 		});
 	</script>
 </body>
