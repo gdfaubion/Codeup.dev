@@ -77,31 +77,19 @@
 			<div class="page-header">
 			  <h1>Add A New Item!</h1>
 			</div>
-			<p id="error">
-				<? if(!empty($error)) : ?>
-					<?= $error; ?>
-				<? endif; ?>
-
-				<? if(!empty($errorMessage)) : ?>
-					<?= $errorMessage; ?>
-				<? endif; ?>
-			</p>
-			<form role="form" method="POST" enctype="multipart/form-data" action="todo_list.php">
+			<? if (!empty($error)): ?>
+				<div class="alert alert-danger"><?= $error; ?></div>
+			<? endif; ?>
+			<? if (!empty($successMessage)): ?>
+				<div class="alert alert-success"><?= $successMessage; ?></div>
+			<? endif; ?>
+			<form role="form" method="POST" enctype="multipart/form-data" action="todo_list_db.php">
 				<div class="form-group">
 					<label for="newItem"><strong>New Item:</strong></label>
 					<input id="newItem" name="newItem" type="text">
 					<br>
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>	
-				<div class="page-header">
-				  <h3>Upload a File!</h3>
-				</div>
-    			<div class="form-group">
-    				<label for="file1"></label>
-        			<input id="file1" name="file1" type="file">
-        			<br>
-					<button type="submit" class="btn btn-primary">Upload</button>
-				</div>
 			</form>
 			<form id="removeForm" action="todo_list_db.php" method="post">
 				<input id="removeId" type="hidden" name="remove" value="">
