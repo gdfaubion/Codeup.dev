@@ -1,6 +1,4 @@
 <?php
-	
-	require_once('classes/filestore.php');	
 
 	$error = null;
 	$successMessage = null;
