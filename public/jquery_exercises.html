@@ -3,6 +3,7 @@
 	<title>Jquery Test</title>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<script src="/js/jquery.js"></script>
 	<style>
 		body{
 			color: blue;
@@ -21,25 +22,25 @@
 		<h2>The Ocean Defined:</h2>
 		<p id="about" class="codeup">An ocean is a body of saline water that composes much of a planet's hydrosphere. On Earth, an ocean is one of the major conventional divisions of the World Ocean, which occupies two-thirds of planet's surface.</p>
 		<h2>The Five Major Oceans</h2>
-		<ol class="list codeup">
+		<ul class="list codeup">
 			<li>Pacific Ocean</li>
 			<li>Atlantic Ocean</li>
 			<li>Indian Ocean</li>
 			<li>Southern Ocean</li>
 			<li>Arctic Ocean</li>
-		</ol>
+		</ul>
 	</div>
 	<div class="col-md-6">
 		<img src="/img/Ocean2.jpg">
 	</div>
-	<script src="/js/jquery.js"></script>
 	<script>
-		$('document').ready(function() {
-		    var contents = $('.codeup');
-		    contents.css("border", "1px red solid");
-		});
+		$('li').css('font-size', '20px');
+		$('li, p, h1').css("background-color", "#FF0");
+		alert($('#header').html());
+
 	</script>
 </body>
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="/js/jquery.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/js/bootstrap.min.js"></script>
 </html>
