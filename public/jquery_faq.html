@@ -1,15 +1,18 @@
 <html>
 <head>
 	<title>FAQ's</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/portfolio.css">
 	<script src="/js/jquery.js"></script>
 	<style type="text/css">
-		.invisible{
-			display: none;
+		.clickable{
+			cursor: pointer;
 		}
 	</style>
 </head>
 <body>
 	<div class="col-md-12">
+		<h2>FAQ's</h2>
 		<dl>
 			<dt>What is the National Parks Conservation Association?</dt>
 				<dd>We are an independent, nonpartisan voice working to address major threats facing the National Park System. NPCA was established in 1919, just three years after the National Park Service. Stephen Mather, the first director of the Park Service, was one of our founders. He felt very strongly that the national parks would need an independent voice-outside the political system—to ensure these places remained unimpaired for future generations. We have more than 800,000 members and supporters. In addition to our national headquarters in Washington, D.C., NPCA has 24 regional and field offices around the country. Our mission: to protect and enhance America's National Park System for present and future generations.</dd>
@@ -43,13 +46,56 @@
 				<br>
 		</dl>
 	</div>
-	<button class='btn btn-success toggle'>Display Answers</button> 
+	<div>
+		<h3 id="one">YellowStone National Park</h3>
+			<ul id="yellowstone">
+				<li>There are over 40 major waterfalls in Yellowstone</li>
+				<li>Yellowstone has about 300 active geysers and about 10,000 thermal features</li>
+				<li>Yellowstone produces 3.3 million acre-feet of water every year making it one of the riches sources for water in the western United States</li>
+				<li>Yellowstone National Park is 63 miles long and 54 miles wide</li>
+			</ul>
+		<h3 id="two">Glacier National Park</h3>
+			<ul id="glacier">
+				<li>Established as a park on May 11, 1910.</li>
+				<li>Total number of lakes: 762</li>
+				<li>Acreage: 1,012,837</li>
+				<li>Number of species of animals: 68...from mice to moose</li>
+			</ul>
+		<h3 id="three">Acadia National Park</h3>
+			<ul id="acadia">
+				<li>Acadia National Park, with 30,300 acres on Mount Desert Island, occupies half of the island.</li>
+				<li>Mount Desert Island has a permanent population of about 10,000, although over two million tourists a year visit the Acadia National Park.</li>
+				<li>There are 24 mountain peaks on Mount Desert Island.</li>
+				<li>Although Acadia is one of the smallest national parks, it ranks among the Top 10 in visitors.</li>
+			</ul>
+	</div>
 	<script type="text/javascript">
 
-		$('dd').addClass('invisible');
+		$('dt').addClass('clickable');
 
-		$('.toggle').on('click', function() {
-			$('dd').toggleClass('invisible');
+		$('dd').hide();
+
+		$('dt').on('click', function() {
+			$(this).next().fadeToggle();
+		});
+
+		//Create jQuery code that makes the first li element in each ul have font-weight: bold
+		$('ul').each(function() {
+			$(this).children().first().css('font-weight', 'bold');
+		});
+
+		$('h3').addClass('clickable');
+
+		$('#one').on('click', function(){
+			$('#yellowstone').fadeToggle();
+		});
+
+		$('#two').on('click', function(){
+			$('#glacier').fadeToggle();
+		});
+
+		$('#three').on('click', function(){
+			$('#acadia').fadeToggle();
 		});
 		
 		

@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>Whack-A-Mole</title>
+	<script src="/js/jquery.js"></script>
+</head>
+<body>
+	<img src="/img/whack-a-mole.jpeg">
+</body>
+	<script type="text/javascript">
+
+		$('img').hide();
+
+		$('img').fadeIn();
+
+		$('img').on('click', function(){
+			$(this).fadeOut();
+
+		});
+	</script>
+</html>
