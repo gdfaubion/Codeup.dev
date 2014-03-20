@@ -38,7 +38,6 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/portfolio.css">
 	<link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
-	<script src="/js/jquery.js"></script>
 	<style type="text/css">
 		body{
 			font-family: 'Belgrano', serif;
