@@ -76,7 +76,7 @@
 		$('dd').hide();
 
 		$('dt').on('click', function() {
-			$(this).next().fadeToggle();
+			$(this).next().slideToggle();
 		});
 
 		//Create jQuery code that makes the first li element in each ul have font-weight: bold
@@ -87,15 +87,15 @@
 		$('h3').addClass('clickable');
 
 		$('#one').on('click', function(){
-			$('#yellowstone').fadeToggle();
+			$('#yellowstone').slideToggle();
 		});
 
 		$('#two').on('click', function(){
-			$('#glacier').fadeToggle();
+			$('#glacier').slideToggle();
 		});
 
 		$('#three').on('click', function(){
-			$('#acadia').fadeToggle();
+			$('#acadia').slideToggle();
 		});
 		
 		
